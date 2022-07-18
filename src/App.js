@@ -1,5 +1,5 @@
-import React from "react";
-import logo from './logo.svg';
+import React, { useState } from "react";
+import range from './range.jpeg'
 import './App.css';
 
 /**
@@ -13,17 +13,17 @@ const users = [
 ];
 
 // comment this out after completion and uncomment code below it to proceed
-function Child() {
-  return <div>This is children content</div>;
-}
-/**
-  Challenge: Uncomment this code to complete quiz
+// function Child() {
+//   return <div>This is children content</div>;
+// }
 
-function Child() {
+  // Challenge: Uncomment this code to complete quiz
+
+function Child({update}) {
   return (
     <>
       <div>Child</div>
-      <button>Change Parent Value</button>
+      <button onClick={update}>Change Parent Value</button>
     </>
   );
 }
@@ -32,6 +32,10 @@ function Parent() {
   const [value, setValue] = React.useState(
     "I need to be updated from my child"
   );
+
+  function update() {
+    console.log(value)
+  }
 
   return (
     <>
@@ -42,36 +46,49 @@ function Parent() {
       </div>
 
       <div className="wrapper">
-        <Child />
+        <Child update />
       </div>
     </>
   );
 }
-Uncomment this to tackle quiz
-**/
+// Uncomment this to tackle quiz
 
-// Comment out after completion
-function Parent() {
-  return (
-    <div>
-      <h3>Parent Component</h3>
-    </div>
-  );
-}
+
+// // Comment out after completion
+// function Parent() {
+//   return (
+//     <div>
+//       <h3>Parent Component</h3>
+//     </div>
+//   );
+// }
 // Comment above code after completion
 
 function App() {
   const [] = React.useState(true);
+  const element = <h1>JSX is cool!</h1>
+  const [hideElement, setHideElement] = useState(true);
+
+  const toggle = () => {
+    setHideElement(false)
+  }
+
+  
   return (
     
     <>
-    
-    <img src={logo} className="App-logo" alt="logo" />
+    {element}
+    <img src={range} className="App-logo" alt="logo" />
       <h3>User names</h3>
-      <ul></ul>
-      <button>Hide Element Below</button>
+      <ul>{users.map((item, index)=> {
+        return (
+          <li key={index}>{item.name}</li>
+        )
+      })}</ul>
+      <button onClick={toggle}>Hide Element Below</button>
 
-      <div>Toggle Challenge</div>
+      {hideElement ? <div>Toggle Challenge</div> : null}
+      
       <Parent>
       <Child />
     </Parent>
